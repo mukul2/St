@@ -1,72 +1,567 @@
-name: $(Date:yyyyMMdd)$(Rev:r)
-variables:
-  projectDirectory: ''
+#
+# Azure Pipelines
+
 trigger:
-- master
-jobs:
-  - job: apk
+  batch: true
+
+name: $(Date:yyyyMMdd)$(Rev:r)
+
+
+
+stages:
+- stage: Build
+  displayName: 'Build Flutter App'
+  condition: always()
+  jobs:
+  - job: iOS
+    displayName: Build iOS bundle
     pool:
-      vmImage: 'windows-latest'
+      vmImage: 'macOS-latest'
+    variables:
+      scheme: 'Runner'
+      sdk: 'iphoneos'
+      configuration: 'Release'
+      COCOAPODS_DISABLE_STATS: true
+
     steps:
+    - task: Bash@3
+      displayName: 'cocoa'
+      inputs:
+        targetType: inline
+        script: |
+          echo "uninstalling all cocoapods versions"
+          sudo gem uninstall cocoapods -ax
+          echo "installing cocoapods version pre"
+          sudo gem install cocoapods --pre 
+    - task: Bash@3
+      displayName: 'cocoa'
+      inputs:
+        targetType: inline
+        script: |
+          chmod -R +x $(System.DefaultWorkingDirectory) 
+
+    # - task: InstallAppleCertificate@2
+    #   displayName: 'Install Apple Certificate'
+    #   inputs:
+    #     certSecureFile: 'Certificates.p12'
+    #     certPwd: 'Motoguzzi35'
+    #     deleteCert: true
+    # - task: InstallAppleCertificate@2
+    #   displayName: 'Install Apple Certificate'
+    #   inputs:
+    #     certSecureFile: 'Certificates01.p12'
+    #     certPwd: 'Motoguzzi35'
+    #     deleteCert: true
+    # - task: InstallAppleCertificate@2
+    #   displayName: 'Install Apple Certificate'
+    #   inputs:
+    #     certSecureFile: 'CertificatesDis.p12'
+    #     certPwd: 'Motoguzzi35'
+    #     deleteCert: true
+    # - task: InstallAppleCertificate@2
+    #   displayName: 'Install Apple Certificate'
+    #   inputs:
+    #     certSecureFile: 'St04.p12'
+    #     certPwd: 'Motoguzzi35'
+    #     deleteCert: true
+    # - task: InstallAppleProvisioningProfile@1
+    #   displayName: 'Install Apple Provisioning Profile'
+    #   inputs:
+    #     provisioningProfileLocation: 'secureFiles'
+    #     provProfileSecureFile: 'staht01.mobileprovision'
+
+    # - task: InstallAppleProvisioningProfile@1
+    #   displayName: 'Install Apple Provisioning Profile'
+    #   inputs:
+    #     provisioningProfileLocation: 'secureFiles'
+    #     provProfileSecureFile: 'staht02.mobileprovision'  
+    # - task: InstallAppleProvisioningProfile@1
+    #   displayName: 'Install Apple Provisioning Profile'
+    #   inputs:
+    #     provisioningProfileLocation: 'secureFiles'
+    #     provProfileSecureFile: 'staht03.mobileprovision'                
+    # - task: InstallAppleProvisioningProfile@1
+    #   displayName: 'Install Apple Provisioning Profile'
+    #   inputs:
+    #     provisioningProfileLocation: 'secureFiles'
+    #     provProfileSecureFile: 'staht03.mobileprovision'
+
+    # - task: InstallAppleProvisioningProfile@1
+    #   displayName: 'Install Apple Provisioning Profile'
+    #   inputs:
+    #     provisioningProfileLocation: 'secureFiles'
+    #     provProfileSecureFile: 'stahtprovision.mobileprovision'
+    # - task:  iMDsoftDevOps2021.flutter.flutter-install.FlutterInstall@0
+    #   inputs:
+    #     mode: 'auto'
+    #     channel: 'stable'
+    #     version: 'latest'
+    # - task:  iMDsoftDevOps2021.flutter.flutter-build.FlutterBuild@0
+    #   inputs:
+    #     target: 'ipa'
+    #     projectDirectory: '.'
+    - task: Bash@3
+      displayName: '[Flutter] Get Flutter source'
+      inputs:
+        targetType: inline
+        script: |
+          git clone https://github.com/flutter/flutter.git -b beta
+    - task: Bash@3
+      displayName: '[Flutter] Install Flutter'
+      inputs:
+        targetType: inline
+        script: |
+          echo "##vso[task.setvariable variable=FlutterToolPath]`pwd`/flutter/bin"
+    - task: Bash@3
+      displayName: '[Flutter] Configure Flutter'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $(FlutterToolPath)/flutter doctor -v
+          $(FlutterToolPath)/flutter config --no-analytics
+    - task: Bash@3
+      displayName: '[Flutter] Build project environment'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $(FlutterToolPath)/flutter pub get
+          $(FlutterToolPath)/flutter pub global activate junitreport
+    # - task: Bash@3
+    #   displayName: '[Flutter] Flutter test'
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       export PATH="$PATH":"$HOME/.pub-cache/bin"
+    #       export PATH="$PATH:`pwd`/flutter/bin/cache/dart-sdk/bin"
+    #       $(FlutterToolPath)/flutter test --machine | tojunit --output TestResults.xml
+    # - task: PublishTestResults@2
+    #   inputs:
+    #     testResultsFormat: 'JUnit'
+    #     testResultsFiles: TestResults.xml
+
+    # - task: Bash@3
+    #   displayName: '[Flutter] Flutter coverage'
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       pip install lcov_cobertura
+    #       $(FlutterToolPath)/flutter test --coverage
+    #       python -m lcov_cobertura coverage/lcov.info -o coverage/coverage.xml
+    # - task: PublishCodeCoverageResults@1
+    #   inputs:
+    #     codeCoverageTool: 'cobertura'
+    # #     summaryFileLocation: coverage/coverage.xml
+    - task: Bash@3
+      displayName: 'cocoa'
+      inputs:
+        targetType: inline
+        script: |
+          cd ios && mkdir -p $HOME/Software/ruby && export GEM_HOME=$HOME/Software/ruby && gem install cocoapods && export PATH=$PATH:$HOME/Software/ruby/bin && sudo chmod go-w /usr/local/bin && gem install ffi --version 1.13.1 --user-install && export PATH=$HOME/.gem/ruby/2.6.0/bin:$PATH         
+    # # - task: Bash@3
+    #   displayName: '[Flutter] Flutter build'
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       $(FlutterToolPath)/flutter build appbundle
+    # - task: CopyFiles@2
+    #   inputs:
+    #     contents: '**/*.aab'
+    #     targetFolder: '$(build.artifactStagingDirectory)'   
+    - task: Bash@3
+      displayName: 'precache'
+      inputs:
+        targetType: inline
+        script: |
+          $(FlutterToolPath)/flutter precache --ios         
+    - task: Bash@3
+      displayName: 'cocoa'
+      inputs:
+        targetType: inline
+        script: |
+          cd ios && pod install         
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          
+          env
+    - task: Bash@3
+      displayName: 'cocoa'
+      inputs:
+        targetType: inline
+        script: |
+          cd ios && sudo gem update cocoapods --pre && pod update && pod deintegrate && pod install        
+
     # - task: FlutterInstall@0
     #   inputs:
     #     channel: 'stable'
     #     version: 'latest'
-
-    - task: CmdLine@2
-      inputs:
-        script: 'git clone https://github.com/flutter/flutter.git -b stable'
-    - task: CmdLine@2
-      inputs:
-        script: 'set PATH=D:\a\1\s\flutter\bin '
-
-
-
-    - task: CmdLine@2
-      inputs:
-        script: 'D:\a\1\s\flutter\bin\flutter doctor'
-    - task: CmdLine@2
-      inputs:
-        script: 'D:\a\1\s\flutter\bin\flutter build apk '
-    # - task: SendEmail@1
-    #   inputs:
-    #     To: 'md.aminul.islam@staht.com'
-    #     From: 'noreply@staht.com'
-    #     Subject: 'APK for Testing'
-    #     Body: 'Hello,Find the attached APK for testing'
-    #     BodyAsHtml: false
-    #     AddAttachment: true
-    #     Attachment: 'D:\a\1\s\build\app\outputs\flutter-apk\app-release.apk'
-    #     SmtpServer: 'smtp-mail.outlook.com'
-    #     SmtpUsername: 'noreply@staht.com'
-    #     SmtpPassword: 'Har82283'
-
     # - task: FlutterBuild@0
     #   inputs:
-    #     target: web
-    #     projectDirectory: ''
+    #     target: 'ios'
+    #     projectDirectory: '.'
+
+    # - task: Bash@3
+    #   displayName: '[Flutter] Flutter build'
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       $(FlutterToolPath)/flutter build ios --release --no-codesign --build-number $(Build.BuildId)
+
+    # - task: Bash@3
+    #   displayName: '[Flutter] Flutter build'
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       $(FlutterToolPath)/flutter build ipa
+    # - task: Bash@3
+    #   displayName: '[Flutter] Flutter build ipa'
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #           /Applications/Xcode_13.1.app/Contents/Developer/usr/bin/xcodebuild -sdk iphoneos -configuration Release -workspace /Users/runner/work/1/s/ios/Runner.xcworkspace -scheme Runner archive -verbose CODE_SIGN_STYLE=Automatic -allowProvisioningUpdates
+    # - task: Xcode@5
+    #   inputs:
+    #     actions: 'build'
+    #     packageApp: true
+    #     signingIdentity: 'Apple Distribution: Staht Limited (3W773RS356)'
+    #     provisioningProfileUuid: '7f2244e3-9729-402a-a666-18aa92dd239e'
+    - task: AppStoreRelease@1
+      displayName: 'Publish to TestFlight'
+      inputs:
+        authType: 'ApiKey'
+        apiKeyId: 'W89FJQKB3W'
+        apiKeyIssuerId: 'f3c3afe7-dd6f-499b-8072-13e4e805c793'
+        apitoken: 'TUlHVEFnRUFNQk1HQnlxR1NNNDlBZ0VHQ0NxR1NNNDlBd0VIQkhrd2R3SUJBUVFna1hEdUpkbVZUQ0FxNC9nSwptRExQR2dTMWVzcVV0aUFVcEZieVJOK2MyVHFnQ2dZSUtvWkl6ajBEQVFlaFJBTkNBQVRpbFlYRjl2aS9MTkdkCkcyTTlLeVZpUVhiMkF2aTBHelgyTUg2dTZZZ0RDZzNoK1hlNXcvRjBHL05RT0tHazFFZVBlNEtsOGVnL0xFcnUKOXNoSnhNank='
+        appIdentifier: 'com.staht.connect'
+        appType: 'iOS'
+        releaseTrack: 'TestFlight'
+        ipaPath: '$(Pipeline.Workspace)/*.ipa'
+        shouldSkipWaitingForProcessing: true
+        shouldSkipSubmission: true
+    # - task: CopyFiles@2
+    #   inputs:
+    #     contents: '**/*.ipa'
+    #     targetFolder: '$(build.artifactStagingDirectory)'  
+    # - task: Xcode@5
+    #   displayName: '[Xcode] Archive and sign'
+    #   inputs:
+    #     actions: 'archive'
+    #     sdk: '$(sdk)'
+    #     configuration: '$(configuration)'
+    #     scheme: 'Runner'
+        
+    #     xcWorkspacePath: ios/Runner.xcworkspace
+    #     signingOption: 'auto'
+    #     # signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+    #     # provisioningProfileUuid: 'cea2dafa-5ee7-4c41-87d1-926933bb3bad'
+    #     # teamId: 'D3AY9TW65D'
+    #     packageApp: true
+    #     workingDirectory: 'ios'
+    #     exportOptions: 'auto'
+    #     exportMethod: 'ad-hoc'
+    #     # exportTeamId: 'D3AY9TW65D'
+    #     exportOptionsPlist: 'exportOptions.plist'
+    #     archivePath: 'output/$(sdk)/$(configuration)/Runner.xcarchive'
+    #     exportPath: 'output/$(sdk)/$(configuration)'
+    #     useXcpretty: false
+    #     args: '-verbose'
+        
 
 
     # - task: CopyFiles@2
+    #   displayName: 'Copy .ipa package'
     #   inputs:
-    #       SourceFolder: 'D:\a\1\s\build\app\outputs\flutter-apk\app-release.apk'
+    #     targetFolder: '$(Build.ArtifactStagingDirectory)'
+    #     cleanTargetFolder: true
+    #     contents: |
+    #       output/$(sdk)/$(configuration)/**
+    #       CHANGELOG.md
+    # - task: PublishPipelineArtifact@1
+    #   displayName: 'Publish .ipa package'
+    #   inputs:
+    #     targetPath: $(Build.ArtifactStagingDirectory)
+    #     artifactName: ipa
 
-    #       Contents: '**'
-    #       TargetFolder: 'D:\a\1\s'
-    # - task: PublishBuildArtifacts@1
-    #   inputs:
-    #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    #     ArtifactName: 'drop/dist'
-    #     publishLocation: 'Container'
+# - stage: Production
+#   displayName: 'App Store deployments'
+#   dependsOn: Build
+#   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+#   jobs:
+#     - deployment: iOS
+#       displayName: 'iOS Deployment'
+#       environment: 'My Environment'
+#       pool:
+#         vmImage: 'ubuntu-latest'
+#       strategy:
+#         runOnce:
+#           deploy:
+#             steps:
+#               - download: current
+#                 artifact: ipa
+#               - task: AppCenterDistribute@3
+#                 displayName: 'Deploy to Visual Studio App Center'
+#                 inputs:
+#                   serverEndpoint: AppCenter
+#                   appSlug: 'group/appName'
+#                   appFile: '$(Pipeline.Workspace)/ipa/output/iphoneos/Release/Runner.ipa'
+#                   symbolsIncludeParentDirectory: false
+#                   releaseNotesOption: file
+#                   releaseNotesFile: '$(Pipeline.Workspace)/ipa/CHANGELOG.md'
+#                   destinationType: store
+#                   destinationStoreId: '<TESTFLIGHT GROUP>'
+#                   isSilent: false
+# name: $(Date:yyyyMMdd)$(Rev:r)
+# trigger:
+#   branches: 
+#     include:
+#       - master
     
-    - task: PublishBuildArtifacts@1
+# variables:
+#   scheme: ''
+#   sdk: 'iphoneos'
+#   configuration: 'Release'
+#   projectDirectory: ''
+#   ipaApkName: weather_rx_stream_sink
+
+# stages:
+# - stage: Build
+#   displayName: Build
+#   jobs: 
+#   - job: Build
+#     displayName: Build job
+#     pool:
+#       vmImage: 'macOS-latest'
+#     steps:    
+#     - task: InstallAppleCertificate@2
+#       displayName: 'Install a DevApple certificate'
+#       inputs:
+#          certSecureFile: 'Certificates.p12'
+#          certPwd: 'Motoguzzi35'
+#     - task: InstallAppleProvisioningProfile@1
+#       displayName: 'Install a prov certificate'
+#       inputs:
+#         provisioningProfileLocation: 'secureFiles'
+#         provProfileSecureFile: 'stahtprovision.mobileprovision'
+#     - task: CmdLine@2
+#       inputs:
+#         script: 'git clone https://github.com/flutter/flutter.git -b stable'
+#     - task: Bash@3
+#       displayName: '[Flutter] Install Flutter'
+#       inputs:
+#         targetType: inline
+#         script: |
+#           echo "##vso[task.setvariable variable=FlutterToolPath]`pwd`/flutter/bin"
+
+#     - task: Bash@3
+#       displayName: '[Flutter] Configure Flutter'
+#       inputs:
+#         targetType: 'inline'
+#         script: |
+#           $(FlutterToolPath)/flutter doctor -v
+#           $(FlutterToolPath)/flutter config --no-analytics    
+#     - task: Bash@3
+#       displayName: '[Flutter] Flutter build ios'
+#       inputs:
+#         targetType: 'inline'
+#         script: |
+#            $(FlutterToolPath)/flutter build ios
+#     - task: Bash@3
+#       displayName: '1'
+#       inputs:
+#         targetType: inline
+#         script: |
+#          gem update cocoapods
+#     - task: Bash@3
+#       displayName: 'cd ios'
+#       inputs:
+#         targetType: inline
+#         script: |
+#          cd ios
+#     - task: Bash@3
+#       displayName: 'pod init'
+#       inputs:
+#         targetType: inline
+#         script: |
+#          pod init
+#     - task: Bash@3
+#       displayName: '2'
+#       inputs:
+#         targetType: inline
+#         script: |
+#          pod update
+#     - task: Bash@3
+#       displayName: '3'
+#       inputs:
+#         targetType: inline
+#         script: |
+#          pod update
+#     - task: Xcode@5
+#       inputs:
+#         actions: 'build'
+#         scheme: ''
+#         sdk: 'iphoneos'
+#         configuration: 'Release'
+#         xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
+#         xcodeVersion: 'default'
+#     # - task: Xcode@5
+#     #   inputs:
+#     #     actions: 'archive' 
+#     #     packageApp: true
+#     #     exportMethod: package
+
+    - task: CopyFiles@2
       inputs:
-        PathtoPublish: 'D:\a\1\s\build\app\outputs\flutter-apk\app-release.apk'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
-    
-    # - task: PublishBuildArtifacts@1
+        contents: '**/*.ipa'
+        targetFolder: '$(build.artifactStagingDirectory)'
+#     - task: AppStoreRelease@1
+#       inputs:
+#         serviceEndpoint: 'Staht Connect App'
+#         releaseTrack: 'TestFlight'
+#         appIdentifier: 'com.staht.connect'
+#         appType: 'iOS'
+    # - task: Bash@3
+    #   displayName: '[Flutter] Flutter build ipa'
     #   inputs:
-    #     PathtoPublish: '.firebaserc'
-    #     ArtifactName: 'drop'
-    #     publishLocation: 'Container'
+    #     targetType: 'inline'
+    #     script: |
+    #        $(FlutterToolPath)/flutter build ipa
+#     # - task: Bash@3
+#     #   displayName: '[Flutter] Flutter build ios'
+#     #   inputs:
+#     #     targetType: 'inline'
+#     #     script: |
+#     #        $(FlutterToolPath)/flutter build ios --release --no-codesign --build-number $(Build.BuildId)
+#     # - task: Xcode@5
+#     #   displayName: '[Xcode] Archive and sign'
+#     #   inputs:
+#     #     actions: 'archive'
+#     #     sdk: '$(sdk)'
+#     #     configuration: '$(configuration)'
+#     #     scheme: 'Runner'
+#     #     xcWorkspacePath: ios/Runner.xcworkspace
+#     #     signingOption: 'auto'
+#     #     # signingIdentity: $(APPLE_CERTIFICATE_SIGNING_IDENTITY)
+#     #     # provisioningProfileUuid: $(APPLE_PROV_PROFILE_UUID)
+#     #     teamId: '3W773RS356'
+#     #     packageApp: true
+#     #     workingDirectory: 'ios'
+#     #     exportOptions: 'auto'
+#     #     exportMethod: 'ad-hoc'
+#     #     exportTeamId: '3W773RS356'
+#     #     archivePath: 'output/$(sdk)/$(configuration)/Runner.xcarchive'
+#     #     exportPath: 'output/$(sdk)/$(configuration)'
+#     #     useXcpretty: false
+#     #     args: '-verbose'
+#     # - task: FlutterInstall@0
+#     #   displayName: 'Install flutter'
+#     #   inputs:
+#     #     channel: 'stable'
+#     #     version: 'latest'       
+
+#     # - task: FlutterBuild@0
+#     #   displayName: 'Flutter Build ios'
+#     #   inputs:
+#     #     target: 'ios'
+#     #     projectDirectory: $(projectDirectory)
+#     #     buildName: '$(Build.BuildNumber)'
+#     #     iosCodesign: false
+#     # - task: FlutterTest@0
+#     #   displayName: 'Flutter Test'
+#     #   inputs:
+#     #     projectDirectory: $(projectDirectory)        
+    # - task: Bash@3
+    #   displayName: 'create ipa'
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       xcodebuild -workspace ios/Runner.xcworkspace -scheme prod -sdk iphoneos -configuration Release-prod -allowProvisioningUpdates archive -archivePath build/ios/Runner.xcarchive
+    #       xcodebuild -exportArchive -archivePath build/ios/Runner.xcarchive  -exportPath build/ios/App.ipa
+
+#     # - task: AppStoreRelease@1
+#     #   displayName: 'Publish to the App Store TestFlight track'
+#     #   inputs:
+#     #     serviceEndpoint: 'Staht Connect App'
+#     #     appIdentifier: 'com.staht.connect'
+#     #     ipaPath: '$(System.DefaultWorkingDirectory)/**/*.ipa'
+#     #     shouldSkipWaitingForProcessing: true
+#     #     shouldSkipSubmission: true 
+#     #     appType: 'iOS'
+
+#     # - task: Xcode@5
+#     #   displayName: 'Export ipa'
+#     #   inputs:
+#     #     actions: 'archive'     
+#     #     scheme: 'Runner'
+#     #     packageApp: true
+#     #     configuration: 'release'    
+#     #     workingDirectory: $(projectDirectory)/ios
+#     #     exportOptions: 'auto'
+#     #     exportMethod: 'ad-hoc'
+#     #     exportTeamId: '3W773RS356'
+#     #     provisioningProfileUuid: $(APPLE_PROV_PROFILE_UUID)
+#     #     signingOption: 'manual'
+#     #     signingIdentity: $(APPLE_CERTIFICATE_SIGNING_IDENTITY)
+#     #     archivePath: $(projectDirectory)/ios/build/Runner.xcarchive
+#     #     exportPath: $(projectDirectory)/ios/build
+#     #     teamId: '3W773RS356'
+#     #     xcWorkspacePath: $(projectDirectory)/ios/Runner.xcworkspace
+#     #     args: '-verbose'        
+#     - task: CopyFiles@2
+#       displayName: 'Copy .ipa package'
+#       inputs:
+#         targetFolder: '$(Build.ArtifactStagingDirectory)'
+#         cleanTargetFolder: true
+#         contents: |
+#           output/$(sdk)/$(configuration)/**
+#           CHANGELOG.md
+#     - task: CopyFiles@2
+#       inputs:
+#         contents: '**/*.ipa'
+#         targetFolder: '$(build.artifactStagingDirectory)'
+#         overWrite: true
+#     - task: PublishBuildArtifacts@1
+#       inputs:
+#         artifactName: 'drop' 
+#     # - task: AppCenterDistribute@3
+#     #   displayName: 'Distribute ipa on app center'
+#     #   inputs:
+#     #     serverEndpoint: 'token1iOS'
+#     #     appSlug: 'your slug name'
+#     #     appFile: '$(build.artifactStagingDirectory)/$(ipaApkName)/ios/build/$(ipaApkName).ipa'
+#     #     releaseNotesOption: 'input'
+#     #     releaseNotesInput: 'New version'
+#     #     destinationType: 'groups'    
+#     # - task: FlutterBuild@0
+#     #   displayName: 'Flutter Build android'
+#     #   inputs:
+#     #     target: 'apk'
+#     #     projectDirectory: $(projectDirectory)
+#     #     buildName: '$(Build.BuildNumber)'
+#     # - task: AndroidSigning@3
+#     #   displayName: 'Signing and aligning APK file(s) **/*.apk'
+#     #   inputs:
+#     #     apkFiles: '**/*.apk'
+#     #     apksign: true
+#     #     apksignerKeystoreFile: 'appcenterdemo.keystore'
+#     #     apksignerKeystorePassword: 'L@......'
+#     #     apksignerKeystoreAlias: 'alokUpadhyay'
+#     #     apksignerKeyPassword: 'L@......'           
+    
+#     - task: CopyFiles@2
+#       inputs:
+#         contents: '**/*.ipa'
+#         targetFolder: '$(build.artifactStagingDirectory)'
+#     # - task: PublishBuildArtifacts@1
+#     #   inputs:
+#     #     artifactName: 'drop'
+#     # - task: AppCenterDistribute@3
+#     #   displayName: 'Distribute android on app center'
+#     #   inputs:
+#     #     serverEndpoint: 'token1'
+#     #     appSlug: 'slugname'
+#     #     appFile: '$(ipaApkName)/build/app/outputs/apk/release/app-release.apk'
+#     #     releaseNotesOption: 'input'
+#     #     releaseNotesInput: 'New version'
+#     #     destinationType: 'groups'

@@ -26,6 +26,7 @@ workflows:
       
     artifacts:
       - /Users/builder/export_options.plist
+      - /Users/builder/Library/MobileDevice/Certificates/*.p12
       - /Users/builder/Library/MobileDevice/Provisioning Profiles/*.mobileprovision
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log

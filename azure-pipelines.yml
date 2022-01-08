@@ -68,7 +68,7 @@ stages:
       displayName: 'Install Apple Provisioning Profile'
       inputs:
         provisioningProfileLocation: 'secureFiles'
-        provProfileSecureFile: 'm.mobileprovision'
+        provProfileSecureFile: 'p.mobileprovision'
 
     # - task: InstallAppleProvisioningProfile@1
     #   displayName: 'Install Apple Provisioning Profile'

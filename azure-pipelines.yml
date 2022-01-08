@@ -1,0 +1,72 @@
+name: $(Date:yyyyMMdd)$(Rev:r)
+variables:
+  projectDirectory: ''
+trigger:
+- master
+jobs:
+  - job: apk
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    # - task: FlutterInstall@0
+    #   inputs:
+    #     channel: 'stable'
+    #     version: 'latest'
+
+    - task: CmdLine@2
+      inputs:
+        script: 'git clone https://github.com/flutter/flutter.git -b stable'
+    - task: CmdLine@2
+      inputs:
+        script: 'set PATH=D:\a\1\s\flutter\bin '
+
+
+
+    - task: CmdLine@2
+      inputs:
+        script: 'D:\a\1\s\flutter\bin\flutter doctor'
+    - task: CmdLine@2
+      inputs:
+        script: 'D:\a\1\s\flutter\bin\flutter build apk '
+    # - task: SendEmail@1
+    #   inputs:
+    #     To: 'md.aminul.islam@staht.com'
+    #     From: 'noreply@staht.com'
+    #     Subject: 'APK for Testing'
+    #     Body: 'Hello,Find the attached APK for testing'
+    #     BodyAsHtml: false
+    #     AddAttachment: true
+    #     Attachment: 'D:\a\1\s\build\app\outputs\flutter-apk\app-release.apk'
+    #     SmtpServer: 'smtp-mail.outlook.com'
+    #     SmtpUsername: 'noreply@staht.com'
+    #     SmtpPassword: 'Har82283'
+
+    # - task: FlutterBuild@0
+    #   inputs:
+    #     target: web
+    #     projectDirectory: ''
+
+
+    # - task: CopyFiles@2
+    #   inputs:
+    #       SourceFolder: 'D:\a\1\s\build\app\outputs\flutter-apk\app-release.apk'
+
+    #       Contents: '**'
+    #       TargetFolder: 'D:\a\1\s'
+    # - task: PublishBuildArtifacts@1
+    #   inputs:
+    #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    #     ArtifactName: 'drop/dist'
+    #     publishLocation: 'Container'
+    
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: 'D:\a\1\s\build\app\outputs\flutter-apk\app-release.apk'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+    
+    # - task: PublishBuildArtifacts@1
+    #   inputs:
+    #     PathtoPublish: '.firebaserc'
+    #     ArtifactName: 'drop'
+    #     publishLocation: 'Container'

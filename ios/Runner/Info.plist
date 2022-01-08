@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Staht Connect</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>This app needs to be able to access your Apple Music for better user experience</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>App requires bluetooth permission to get data from IoT devices to do operations</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>App requires bluetooth permission to get data from IoT devices to do operations</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>This app needs to be able to access your Calender for better user experience</string>
+	<key>NSCameraUsageDescription</key>
+	<string>App requires camera permission to take photo and video on a test</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app needs to be able to access your Contact description for better user experience</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>App requires location information to save as the test performing location</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>App Needs to use microphone to record audio</string>
+	<key>NSMotionUsageDescription</key>
+	<string>This app needs to be able to access your motion use</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App requires photo library permission to take photos for profile</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app needs to be able to access your speech recognition use to recognize speech</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+</dict>
+</plist>

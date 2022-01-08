@@ -1,0 +1,189 @@
+#
+# Azure Pipelines
+
+trigger:
+- master
+
+name: $(Build.BuildId)_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)
+
+variables:
+  projectDirectory: ''
+
+stages:
+- stage: Build
+  displayName: 'Build Flutter App'
+  condition: always()
+  jobs:
+  - job: iOS
+    displayName: Build iOS bundle
+    pool:
+      vmImage: 'macOS-11'
+    variables:
+      scheme: 'Runner'
+      sdk: 'iphoneos'
+      configuration: 'Release'
+      COCOAPODS_DISABLE_STATS: true
+    steps:
+    - task: InstallAppleCertificate@2
+      displayName: 'Install Apple Certificate'
+      inputs:
+        certSecureFile: 'Certificates.p12'
+        certPwd: 'Motoguzzi35'
+        deleteCert: true
+
+    - task: InstallAppleProvisioningProfile@1
+      displayName: 'Install Apple Provisioning Profile'
+      inputs:
+        provisioningProfileLocation: 'secureFiles'
+        provProfileSecureFile: 'stahtprovision.mobileprovision'
+
+    - task: Bash@3
+      displayName: '[Flutter] Get Flutter source'
+      inputs:
+        targetType: inline
+        script: |
+          git clone https://github.com/flutter/flutter.git -b stable
+
+    - task: Bash@3
+      displayName: '[Flutter] Install Flutter'
+      inputs:
+        targetType: inline
+        script: |
+          echo "##vso[task.setvariable variable=FlutterToolPath]`pwd`/flutter/bin"
+
+    - task: Bash@3
+      displayName: '[Flutter] Configure Flutter'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $(FlutterToolPath)/flutter doctor -v
+          $(FlutterToolPath)/flutter config --no-analytics
+
+    - task: Bash@3
+      displayName: '[Flutter] Build project environment'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $(FlutterToolPath)/flutter pub get
+          $(FlutterToolPath)/flutter pub global activate junitreport
+
+    # - task: Bash@3
+    #   displayName: '[Flutter] Flutter test'
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       export PATH="$PATH":"$HOME/.pub-cache/bin"
+    #       export PATH="$PATH:`pwd`/flutter/bin/cache/dart-sdk/bin"
+    #       $(FlutterToolPath)/flutter test --machine | tojunit --output TestResults.xml
+
+    # - task: PublishTestResults@2
+    #   inputs:
+    #     testResultsFormat: 'JUnit'
+    #     testResultsFiles: TestResults.xml
+
+    # - task: Bash@3
+    #   displayName: '[Flutter] Flutter coverage'
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       pip install lcov_cobertura
+    #       $(FlutterToolPath)/flutter test --coverage
+    #       python -m lcov_cobertura coverage/lcov.info -o coverage/coverage.xml
+
+    # - task: PublishCodeCoverageResults@1
+    #   inputs:
+    #     codeCoverageTool: 'cobertura'
+    #     summaryFileLocation: coverage/coverage.xml
+
+    - task: Bash@3
+      displayName: '[Flutter] Flutter build'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $(FlutterToolPath)/flutter build ios --release --no-codesign --build-number $(Build.BuildId)
+
+    # - task: Bash@3
+    #   displayName: '[Flutter] Flutter build'
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       xcodebuild -workspace ios/Runner.xcworkspace -scheme prod -sdk iphoneos -configuration Release-prod archive -archivePath build/ios/Runner.xcarchive
+    #         xcodebuild -exportArchive -archivePath build/ios/Runner.xcarchive -exportOptionsPlist ci/ExportOptions.plist -exportPath build/ios/App.ipa
+
+    # - task: Xcode@5
+    #   inputs:
+    #     actions: 'archive' 
+    #     sdk: '$(sdk)'
+    #     scheme: '$(scheme)'
+    #     configuration: '$(configuration)'
+    #     xcodeVersion: 'default' # Options: default, 10, 9, 8, specifyPath
+    #     archivePath: 'src/Apps/platypus_app/build/ios/Runner.xcarchive'
+    #     exportPath: 'src/Apps/platypus_app/build/ios'
+    #     packageApp: true
+    #     xcWorkspacePath: ios/Runner.xcworkspace
+    #     signingOption: 'nosign'
+    # - task: Xcode@5
+    #   displayName: '[Xcode] Archive and sign'
+    #   inputs:
+    #     actions: 'archive'
+    #     sdk: '$(sdk)'
+    #     configuration: '$(configuration)'
+    #     scheme: '$(scheme)'
+    #     xcWorkspacePath: ios/Runner.xcworkspace
+    #     signingOption: 'manual'
+    #     signingIdentity: $(APPLE_CERTIFICATE_SIGNING_IDENTITY)
+    #     provisioningProfileUuid: $(APPLE_PROV_PROFILE_UUID)
+    #     teamId: $(TEAM_ID)
+    #     packageApp: true
+    #     workingDirectory: 'ios'
+    #     exportOptions: 'auto'
+    #     exportMethod: 'ad-hoc'
+    #     exportTeamId: $(TEAM_ID)
+    #     archivePath: 'output/$(sdk)/$(configuration)/Runner.xcarchive'
+    #     exportPath: 'output/$(sdk)/$(configuration)'
+    #     useXcpretty: 'false'
+    #     args: '-verbose'
+
+    - task: CopyFiles@2
+      displayName: 'Copy .ipa package'
+      inputs:
+        targetFolder: '$(Build.ArtifactStagingDirectory)'
+        cleanTargetFolder: true
+        contents: |
+          output/$(sdk)/$(configuration)/**
+          CHANGELOG.md
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish .ipa package'
+      inputs:
+        targetPath: $(Build.ArtifactStagingDirectory)
+        artifactName: ipa
+
+# - stage: Production
+#   displayName: 'App Store deployments'
+#   dependsOn: Build
+#   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+#   jobs:
+#     - deployment: iOS
+#       displayName: 'iOS Deployment'
+#       environment: 'My Environment'
+#       pool:
+#         vmImage: 'ubuntu-latest'
+#       strategy:
+#         runOnce:
+#           deploy:
+#             steps:
+#               - download: current
+#                 artifact: ipa
+#               - task: AppCenterDistribute@3
+#                 displayName: 'Deploy to Visual Studio App Center'
+#                 inputs:
+#                   serverEndpoint: AppCenter
+#                   appSlug: 'group/appName'
+#                   appFile: '$(Pipeline.Workspace)/ipa/output/iphoneos/Release/Runner.ipa'
+#                   symbolsIncludeParentDirectory: false
+#                   releaseNotesOption: file
+#                   releaseNotesFile: '$(Pipeline.Workspace)/ipa/CHANGELOG.md'
+#                   destinationType: store
+#                   destinationStoreId: '<TESTFLIGHT GROUP>'
+#                   isSilent: false

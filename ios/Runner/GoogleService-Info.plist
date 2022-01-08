@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1062957635061-t0mvosbu5er67uma4bo2b2aiqk82qe38.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1062957635061-t0mvosbu5er67uma4bo2b2aiqk82qe38</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1062957635061-nqkr9ha3vvt9avk2rjhrps3ec5mk1tq1.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCbRjoeT-R_bY29blcKlG9n7qKE2s2yFNk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1062957635061</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.staht.connect</string>
+	<key>PROJECT_ID</key>
+	<string>staht-connect-322113</string>
+	<key>STORAGE_BUCKET</key>
+	<string>staht-connect-322113.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1062957635061:ios:a733debb193611297d3cbc</string>
+</dict>
+</plist>

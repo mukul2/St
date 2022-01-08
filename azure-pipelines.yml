@@ -40,12 +40,12 @@ stages:
         script: |
           chmod -R +x $(System.DefaultWorkingDirectory) 
 
-    # - task: InstallAppleCertificate@2
-    #   displayName: 'Install Apple Certificate'
-    #   inputs:
-    #     certSecureFile: 'Certificates.p12'
-    #     certPwd: 'Motoguzzi35'
-    #     deleteCert: true
+    - task: InstallAppleCertificate@2
+      displayName: 'Install Apple Certificate'
+      inputs:
+        certSecureFile: 'c.p12'
+     
+        deleteCert: true
     # - task: InstallAppleCertificate@2
     #   displayName: 'Install Apple Certificate'
     #   inputs:
@@ -64,11 +64,11 @@ stages:
     #     certSecureFile: 'St04.p12'
     #     certPwd: 'Motoguzzi35'
     #     deleteCert: true
-    # - task: InstallAppleProvisioningProfile@1
-    #   displayName: 'Install Apple Provisioning Profile'
-    #   inputs:
-    #     provisioningProfileLocation: 'secureFiles'
-    #     provProfileSecureFile: 'staht01.mobileprovision'
+    - task: InstallAppleProvisioningProfile@1
+      displayName: 'Install Apple Provisioning Profile'
+      inputs:
+        provisioningProfileLocation: 'secureFiles'
+        provProfileSecureFile: 'm.mobileprovision'
 
     # - task: InstallAppleProvisioningProfile@1
     #   displayName: 'Install Apple Provisioning Profile'
@@ -227,6 +227,14 @@ stages:
     #     packageApp: true
     #     signingIdentity: 'Apple Distribution: Staht Limited (3W773RS356)'
     #     provisioningProfileUuid: '7f2244e3-9729-402a-a666-18aa92dd239e'
+
+    - task: Bash@3
+      displayName: '[Flutter] Flutter build'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $(FlutterToolPath)/flutter build ipa
+
     - task: AppStoreRelease@1
       displayName: 'Publish to TestFlight'
       inputs:

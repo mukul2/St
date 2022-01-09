@@ -38,6 +38,12 @@ stages:
       inputs:
         targetType: inline
         script: |
+          pip install codemagic-cli-tools 
+    - task: Bash@3
+      displayName: 'cocoa'
+      inputs:
+        targetType: inline
+        script: |
           chmod -R +x $(System.DefaultWorkingDirectory) 
 
     # - task: InstallAppleCertificate@2
@@ -65,11 +71,11 @@ stages:
     #     certSecureFile: 'St04.p12'
     #     certPwd: 'Motoguzzi35'
     #     deleteCert: true
-    - task: InstallAppleProvisioningProfile@1
-      displayName: 'Install Apple Provisioning Profile'
-      inputs:
-        provisioningProfileLocation: 'secureFiles'
-        provProfileSecureFile: 'p.mobileprovision'
+    # - task: InstallAppleProvisioningProfile@1
+    #   displayName: 'Install Apple Provisioning Profile'
+    #   inputs:
+    #     provisioningProfileLocation: 'secureFiles'
+    #     provProfileSecureFile: 'p.mobileprovision'
 
     # - task: InstallAppleProvisioningProfile@1
     #   displayName: 'Install Apple Provisioning Profile'
@@ -101,32 +107,32 @@ stages:
     #   inputs:
     #     target: 'ipa'
     #     projectDirectory: '.'
-    - task: Bash@3
-      displayName: '[Flutter] Get Flutter source'
-      inputs:
-        targetType: inline
-        script: |
-          git clone https://github.com/flutter/flutter.git -b beta
-    - task: Bash@3
-      displayName: '[Flutter] Install Flutter'
-      inputs:
-        targetType: inline
-        script: |
-          echo "##vso[task.setvariable variable=FlutterToolPath]`pwd`/flutter/bin"
-    - task: Bash@3
-      displayName: '[Flutter] Configure Flutter'
-      inputs:
-        targetType: 'inline'
-        script: |
-          $(FlutterToolPath)/flutter doctor -v
-          $(FlutterToolPath)/flutter config --no-analytics
-    - task: Bash@3
-      displayName: '[Flutter] Build project environment'
-      inputs:
-        targetType: 'inline'
-        script: |
-          $(FlutterToolPath)/flutter pub get
-          $(FlutterToolPath)/flutter pub global activate junitreport
+    # - task: Bash@3
+    #   displayName: '[Flutter] Get Flutter source'
+    #   inputs:
+    #     targetType: inline
+    #     script: |
+    #       git clone https://github.com/flutter/flutter.git -b beta
+    # - task: Bash@3
+    #   displayName: '[Flutter] Install Flutter'
+    #   inputs:
+    #     targetType: inline
+    #     script: |
+    #       echo "##vso[task.setvariable variable=FlutterToolPath]`pwd`/flutter/bin"
+    # - task: Bash@3
+    #   displayName: '[Flutter] Configure Flutter'
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       $(FlutterToolPath)/flutter doctor -v
+    #       $(FlutterToolPath)/flutter config --no-analytics
+    # - task: Bash@3
+    #   displayName: '[Flutter] Build project environment'
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       $(FlutterToolPath)/flutter pub get
+    #       $(FlutterToolPath)/flutter pub global activate junitreport
     # - task: Bash@3
     #   displayName: '[Flutter] Flutter test'
     #   inputs:
@@ -152,12 +158,12 @@ stages:
     #   inputs:
     #     codeCoverageTool: 'cobertura'
     # #     summaryFileLocation: coverage/coverage.xml
-    - task: Bash@3
-      displayName: 'cocoa'
-      inputs:
-        targetType: inline
-        script: |
-          cd ios && mkdir -p $HOME/Software/ruby && export GEM_HOME=$HOME/Software/ruby && gem install cocoapods && export PATH=$PATH:$HOME/Software/ruby/bin && sudo chmod go-w /usr/local/bin && gem install ffi --version 1.13.1 --user-install && export PATH=$HOME/.gem/ruby/2.6.0/bin:$PATH         
+    # - task: Bash@3
+    #   displayName: 'cocoa'
+    #   inputs:
+    #     targetType: inline
+    #     script: |
+    #       cd ios && mkdir -p $HOME/Software/ruby && export GEM_HOME=$HOME/Software/ruby && gem install cocoapods && export PATH=$PATH:$HOME/Software/ruby/bin && sudo chmod go-w /usr/local/bin && gem install ffi --version 1.13.1 --user-install && export PATH=$HOME/.gem/ruby/2.6.0/bin:$PATH         
     # # - task: Bash@3
     #   displayName: '[Flutter] Flutter build'
     #   inputs:
@@ -168,31 +174,31 @@ stages:
     #   inputs:
     #     contents: '**/*.aab'
     #     targetFolder: '$(build.artifactStagingDirectory)'   
-    - task: Bash@3
-      displayName: 'precache'
-      inputs:
-        targetType: inline
-        script: |
-          $(FlutterToolPath)/flutter precache --ios         
-    - task: Bash@3
-      displayName: 'cocoa'
-      inputs:
-        targetType: inline
-        script: |
-          cd ios && pod install         
-    - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: |
-          # Write your commands here
+    # - task: Bash@3
+    #   displayName: 'precache'
+    #   inputs:
+    #     targetType: inline
+    #     script: |
+    #       $(FlutterToolPath)/flutter precache --ios         
+    # - task: Bash@3
+    #   displayName: 'cocoa'
+    #   inputs:
+    #     targetType: inline
+    #     script: |
+    #       cd ios && pod install         
+    # - task: Bash@3
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       # Write your commands here
           
-          env
-    - task: Bash@3
-      displayName: 'cocoa'
-      inputs:
-        targetType: inline
-        script: |
-          cd ios && sudo gem update cocoapods --pre && pod update && pod deintegrate && pod install        
+    #       env
+    # - task: Bash@3
+    #   displayName: 'cocoa'
+    #   inputs:
+    #     targetType: inline
+    #     script: |
+    #       cd ios && sudo gem update cocoapods --pre && pod update && pod deintegrate && pod install        
 
     # - task: FlutterInstall@0
     #   inputs:
@@ -229,26 +235,26 @@ stages:
     #     signingIdentity: 'Apple Distribution: Staht Limited (3W773RS356)'
     #     provisioningProfileUuid: '7f2244e3-9729-402a-a666-18aa92dd239e'
 
-    - task: Bash@3
-      displayName: '[Flutter] Flutter build'
-      inputs:
-        targetType: 'inline'
-        script: |
-          $(FlutterToolPath)/flutter build ipa
+    # - task: Bash@3
+    #   displayName: '[Flutter] Flutter build'
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       $(FlutterToolPath)/flutter build ipa
 
-    - task: AppStoreRelease@1
-      displayName: 'Publish to TestFlight'
-      inputs:
-        authType: 'ApiKey'
-        apiKeyId: 'W89FJQKB3W'
-        apiKeyIssuerId: 'f3c3afe7-dd6f-499b-8072-13e4e805c793'
-        apitoken: 'TUlHVEFnRUFNQk1HQnlxR1NNNDlBZ0VHQ0NxR1NNNDlBd0VIQkhrd2R3SUJBUVFna1hEdUpkbVZUQ0FxNC9nSwptRExQR2dTMWVzcVV0aUFVcEZieVJOK2MyVHFnQ2dZSUtvWkl6ajBEQVFlaFJBTkNBQVRpbFlYRjl2aS9MTkdkCkcyTTlLeVZpUVhiMkF2aTBHelgyTUg2dTZZZ0RDZzNoK1hlNXcvRjBHL05RT0tHazFFZVBlNEtsOGVnL0xFcnUKOXNoSnhNank='
-        appIdentifier: 'com.staht.connect'
-        appType: 'iOS'
-        releaseTrack: 'TestFlight'
-        ipaPath: '$(Pipeline.Workspace)/*.ipa'
-        shouldSkipWaitingForProcessing: true
-        shouldSkipSubmission: true
+    # - task: AppStoreRelease@1
+    #   displayName: 'Publish to TestFlight'
+    #   inputs:
+    #     authType: 'ApiKey'
+    #     apiKeyId: 'W89FJQKB3W'
+    #     apiKeyIssuerId: 'f3c3afe7-dd6f-499b-8072-13e4e805c793'
+    #     apitoken: 'TUlHVEFnRUFNQk1HQnlxR1NNNDlBZ0VHQ0NxR1NNNDlBd0VIQkhrd2R3SUJBUVFna1hEdUpkbVZUQ0FxNC9nSwptRExQR2dTMWVzcVV0aUFVcEZieVJOK2MyVHFnQ2dZSUtvWkl6ajBEQVFlaFJBTkNBQVRpbFlYRjl2aS9MTkdkCkcyTTlLeVZpUVhiMkF2aTBHelgyTUg2dTZZZ0RDZzNoK1hlNXcvRjBHL05RT0tHazFFZVBlNEtsOGVnL0xFcnUKOXNoSnhNank='
+    #     appIdentifier: 'com.staht.connect'
+    #     appType: 'iOS'
+    #     releaseTrack: 'TestFlight'
+    #     ipaPath: '$(Pipeline.Workspace)/*.ipa'
+    #     shouldSkipWaitingForProcessing: true
+    #     shouldSkipSubmission: true
     # - task: CopyFiles@2
     #   inputs:
     #     contents: '**/*.ipa'

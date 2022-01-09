@@ -44,7 +44,7 @@ stages:
       displayName: 'Install Apple Certificate'
       inputs:
         certSecureFile: 'c.p12'
-        certPwd: ''
+        certPwd: 'sdfs'
      
         deleteCert: true
     # - task: InstallAppleCertificate@2

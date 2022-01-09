@@ -43,7 +43,7 @@ stages:
       inputs:
         targetType: inline
         script: |
-          pip install codemagic-cli-tools 
+          pip install codemagic-cli-tools && app-store-connect fetch-signing-files "com.staht.connect" --type IOS_APP_STORE --create
     - task: Bash@3
       displayName: 'cocoa'
       inputs:

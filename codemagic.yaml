@@ -24,6 +24,7 @@ workflows:
       - xcode-project use-profiles
       - echo @env:AUTH_KEY
       - echo @env:CERTIFICATE_KEY
+      - printenv
     
 #       - flutter build ipa --export-options-plist=/Users/builder/export_options.plist
      

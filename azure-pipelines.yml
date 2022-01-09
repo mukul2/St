@@ -33,12 +33,17 @@ stages:
           sudo gem uninstall cocoapods -ax
           echo "installing cocoapods version pre"
           sudo gem install cocoapods --pre 
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.x'
+        addToPath: true
+        architecture: 'x64'
     - task: Bash@3
-      displayName: 'cocoa'
+      displayName: 'code magic'
       inputs:
         targetType: inline
         script: |
-          python3 pip install codemagic-cli-tools 
+          pip install codemagic-cli-tools 
     - task: Bash@3
       displayName: 'cocoa'
       inputs:

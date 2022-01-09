@@ -37,7 +37,7 @@ stages:
       inputs:
         targetType: inline
         script: |
-          cd ios && brew install fastlane && fastlane init && cd ios && cd fastlane && ls
+          cd ios && brew install fastlane && fastlane init && ls
     # - task: Bash@3
     #   displayName: 'cocoa'
     #   inputs:

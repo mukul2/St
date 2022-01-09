@@ -24,11 +24,25 @@ stages:
       COCOAPODS_DISABLE_STATS: true
       APP_STORE_CONNECT_ISSUER_ID: f3c3afe7-dd6f-499b-8072-13e4e805c793
       APP_STORE_CONNECT_KEY_IDENTIFIER: W89FJQKB3W
-      APP_STORE_CONNECT_PRIVATE_KEY: MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgkXDuJdmVTCAq4/gK mDLPGgS1esqUtiAUpFbyRN+c2TqgCgYIKoZIzj0DAQehRANCAATilYXF9vi/LNGd G2M9KyViQXb2Avi0GzX2MH6u6YgDCg3h+Xe5w/F0G/NQOKGk1EePe4Kl8eg/LEru 9shJxMjy
-      CERTIFICATE_PRIVATE_KEY:  MIIEpQIBAAKCAQEA2zT/V8gXPTBqsuN+iWOSbynsS0kzaKciaHjb2gxiNBQHV6wl SklpikiduRdLnyObjQ3OyJF8990m7TUiVRbYVzsBA5tys1VCzmfmk8+1UzIIHPRl 22tfEPZmmOhiDKzpiGhu4UEAg+8aCWvjj60zmJCfIV+9RuuRtdo3ExHGlfAkKVKb 2QG4rxxI0UNhFhTFBStcgmizjfJhGAhoVpX9hgx/2RCqBfT20PVvJdAOH1YKykXj wwBestwBVq49ct2XwJJK8wMKDeSUNXse92kz9GSKcO3Q2i7jhJGAHF7XQWTf7kVP kfiLfLWqdDRhuML6YPK4AIe2MEvLTbM/EByYkwIDAQABAoIBAQDCbBQZuHecJuhL 9+iQVMdZX1acQ7WcGbkz7hYZJKipRiZpBV8hr1EzfEqgEuBYqo1ZoyiHzjqH4ReY hmsICzYg0E2K9IHcO0AAsDjbWvuZaaO2grIg1e/ArLq83kewtGCBQxctJKkfW5+9 QXrZQSalJ4hsYm0PjPp0z7HPcRGwg2RASnOzpnzsqxJsRVmBvgKmnReIxyYOsV1x MB+ofHtoKgs4m72dFvBTgDKd42tINyoj1TlWlhB1HbcxKrSYnnzwXqtkMfNRjIRA 2asDXA3dWgvOIC05gHrnpoc4MWfFgULkRy8mZmy1V1jZcA2ejC71YGt3FHHQq+8g OkmTRyf5AoGBAPNd9PvBHa4JCUALD7Itqs6nFmBXGnrHa2cbBmDcfJ2oEHACktUm 2IktOXtyaQGFt4fQM4N4bMipy1ZZhhJZ+V3hy2Gqb+A+BKyeQ2jOB3dm/A/S/59V 3h2+dgcekr307LYL6P1USM5gxt+5plCcnUFfXuTUK4Jk03R3FQ90kEyvAoGBAOaV +/1j77gH1VGK3+UwSG+udFWPjeAsa3e07DdUaqYtMPZ69LLUBNr+IIZMA9TwCRKn Rs1oy8dHBHwUsFCbHzDVYnnGgo/T2Q+8wAin2L11NSyhwxsojU0oJoy0of2r/+k0 +AuyduFy41g9ScRcT/FqnD8PPYYCzg7dcmn7bFNdAoGBAOzugF/Jd1fEPFk5a6KQ i0Z9rW9F3eXC2HGdAeyzPC9RPA+QsdsK4q1KdjgU/t4YjMGQlVZdm6sQg4IhzkF3 jyszdIo1II40UuCrg/04+FPq02OkjHFXa9ORZd8wiLSfCwWBOufHcspZtcSCPcUl dIP8kao+Vc2w050DgmF1njbJAoGBAI5a0jNhW0F2NJAe+JL59/5a6Z9Y/PIE+mPw 4lRWXXEyPSQuTJuKoWTBtzqx+zue5TsK4n81z3i7s10XOLLK0brIQf+EOl6pHzzD /ppZZUmx7p4bT+SYaIPV4dbEPa3qXhePiANQrmwJDaoQTFZZ11DnzIZx1j3BxY0P 0e70NbBRAoGAbJnEYI+SjUJyLnqYkM1uFB7ifU19R4zG5gKFRsV43WHAwrF2b8G3 JOyLw/BXdJHP86GatX+GytMbxYC0YGJXkDgDYOpi7ShQOSEUI2U8VdaTKyUYe3uv 68nptJtfpu3V45ZZJL8aKNoe1LoCoY2gaS2DFczDVBXv2gApBAkF1ok= 
+      APP_STORE_CONNECT_PRIVATE_KEY: -----BEGIN PRIVATE KEY-----MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgkXDuJdmVTCAq4/gKmDLPGgS1esqUtiAUpFbyRN+c2TqgCgYIKoZIzj0DAQehRANCAATilYXF9vi/LNGdG2M9KyViQXb2Avi0GzX2MH6u6YgDCg3h+Xe5w/F0G/NQOKGk1EePe4Kl8eg/LEru9shJxMjy-----END PRIVATE KEY-----
+      
+      
   
 
     steps:
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your PowerShell commands here.
+          
+          $api_key_content = '-----BEGIN PRIVATE KEY-----
+          MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgkXDuJdmVTCAq4/gK
+          mDLPGgS1esqUtiAUpFbyRN+c2TqgCgYIKoZIzj0DAQehRANCAATilYXF9vi/LNGd
+          G2M9KyViQXb2Avi0GzX2MH6u6YgDCg3h+Xe5w/F0G/NQOKGk1EePe4Kl8eg/LEru
+          9shJxMjy
+          -----END PRIVATE KEY-----'
+          [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($api_key_content))
     - task: Bash@3
       displayName: 'cocoa'
       inputs:
@@ -43,19 +57,19 @@ stages:
         versionSpec: '3.x'
         addToPath: true
         architecture: 'x64'
-    - task: Bash@3
-      displayName: 'code magic'
-      inputs:
-        targetType: inline
-        script: |
-          pip install codemagic-cli-tools
-    - task: Bash@3
-      displayName: 'code magic 2'
-      inputs:
-        targetType: inline
-        script: |
-          app-store-connect fetch-signing-files com.staht.connect --create --type IOS_APP_STORE --platform IOS --issuer-id f3c3afe7-dd6f-499b-8072-13e4e805c793 --key-id W89FJQKB3W --private-key $(CERTIFICATE_PRIVATE_KEY) --certificate-key $(APP_STORE_CONNECT_PRIVATE_KEY)    
     # - task: Bash@3
+    #   displayName: 'code magic'
+    #   inputs:
+    #     targetType: inline
+    #     script: |
+    #       pip install codemagic-cli-tools
+    # - task: Bash@3
+    #   displayName: 'code magic 2'
+    #   inputs:
+    #     targetType: inline
+    #     script: |
+    #       app-store-connect fetch-signing-files com.staht.connect --create --type IOS_APP_STORE --platform IOS --issuer-id f3c3afe7-dd6f-499b-8072-13e4e805c793 --key-id W89FJQKB3W --private-key $(CERTIFICATE_PRIVATE_KEY) --certificate-key $(APP_STORE_CONNECT_PRIVATE_KEY)    
+    # # - task: Bash@3
     #   displayName: 'cocoa'
     #   inputs:
     #     targetType: inline

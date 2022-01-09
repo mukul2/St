@@ -40,13 +40,13 @@ stages:
         script: |
           chmod -R +x $(System.DefaultWorkingDirectory) 
 
-    - task: InstallAppleCertificate@2
-      displayName: 'Install Apple Certificate'
-      inputs:
-        certSecureFile: 'c.p12'
-        certPwd: 'sdfs'
+    # - task: InstallAppleCertificate@2
+    #   displayName: 'Install Apple Certificate'
+    #   inputs:
+    #     certSecureFile: 'c.p12'
+    #     certPwd: 'sdfs'
      
-        deleteCert: true
+    #     deleteCert: true
     # - task: InstallAppleCertificate@2
     #   displayName: 'Install Apple Certificate'
     #   inputs:

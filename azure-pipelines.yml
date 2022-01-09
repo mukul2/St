@@ -54,7 +54,7 @@ stages:
       inputs:
         targetType: inline
         script: |
-          app-store-connect fetch-signing-files com.staht.connect --create --type IOS_APP_STORE --platform IOS --issuer-id f3c3afe7-dd6f-499b-8072-13e4e805c793 --key-id W89FJQKB3W --private-key $(APP_STORE_CONNECT_PRIVATE_KEY) --certificate-key $(CERTIFICATE_PRIVATE_KEY)
+          app-store-connect fetch-signing-files com.staht.connect --create --type IOS_APP_STORE --platform IOS --issuer-id f3c3afe7-dd6f-499b-8072-13e4e805c793 --key-id W89FJQKB3W
     # - task: Bash@3
     #   displayName: 'cocoa'
     #   inputs:

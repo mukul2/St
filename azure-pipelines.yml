@@ -57,7 +57,7 @@ stages:
       inputs:
         targetType: inline
         script: |
-          pip install codemagic-cli-tools && ssh-keygen -t rsa -b 2048 -m PEM -f ~/Users/codemagic_private_key -q -N ""
+          pip install codemagic-cli-tools && ssh-keygen -t rsa -b 2048 -m PEM -f ~/codemagic_private_key -q -N ""
     # - task: Bash@3
     #   displayName: 'code magic 2'
     #   inputs:

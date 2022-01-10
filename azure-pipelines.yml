@@ -22,22 +22,22 @@ stages:
       sdk: 'iphoneos'
       configuration: 'Release'
       COCOAPODS_DISABLE_STATS: true
-      APP_STORE_CONNECT_ISSUER_ID: f3c3afe7-dd6f-499b-8072-13e4e805c793
-      APP_STORE_CONNECT_KEY_IDENTIFIER: W89FJQKB3W
-      APP_AUTH_KEY_P8 : LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JR1RBZ0VBTUJNR0J5cUdTTTQ5QWdFR0NDcUdTTTQ5QXdFSEJIa3dkd0lCQVFRZ2tYRHVKZG1WVENBcTQvZ0sKbURMUEdnUzFlc3FVdGlBVXBGYnlSTitjMlRxZ0NnWUlLb1pJemowREFRZWhSQU5DQUFUaWxZWEY5dmkvTE5HZApHMk05S3lWaVFYYjJBdmkwR3pYMk1INnU2WWdEQ2czaCtYZTV3L0YwRy9OUU9LR2sxRWVQZTRLbDhlZy9MRXJ1CjlzaEp4TWp5Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0=
-      CERTIFICATE_PRIVATE_KEY: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBMnpUL1Y4Z1hQVEJxc3VOK2lXT1NieW5zUzBremFLY2lhSGpiMmd4aU5CUUhWNndsClNrbHBpa2lkdVJkTG55T2JqUTNPeUpGODk5MG03VFVpVlJiWVZ6c0JBNXR5czFWQ3ptZm1rOCsxVXpJSUhQUmwKMjJ0ZkVQWm1tT2hpREt6cGlHaHU0VUVBZys4YUNXdmpqNjB6bUpDZklWKzlSdXVSdGRvM0V4SEdsZkFrS1ZLYgoyUUc0cnh4STBVTmhGaFRGQlN0Y2dtaXpqZkpoR0Fob1ZwWDloZ3gvMlJDcUJmVDIwUFZ2SmRBT0gxWUt5a1hqCnd3QmVzdHdCVnE0OWN0Mlh3SkpLOHdNS0RlU1VOWHNlOTJrejlHU0tjTzNRMmk3amhKR0FIRjdYUVdUZjdrVlAKa2ZpTGZMV3FkRFJodU1MNllQSzRBSWUyTUV2TFRiTS9FQnlZa3dJREFRQUJBb0lCQVFEQ2JCUVp1SGVjSnVoTAo5K2lRVk1kWlgxYWNRN1djR2JrejdoWVpKS2lwUmlacEJWOGhyMUV6ZkVxZ0V1QllxbzFab3lpSHpqcUg0UmVZCmhtc0lDellnMEUySzlJSGNPMEFBc0RqYld2dVphYU8yZ3JJZzFlL0FyTHE4M2tld3RHQ0JReGN0SktrZlc1KzkKUVhyWlFTYWxKNGhzWW0wUGpQcDB6N0hQY1JHd2cyUkFTbk96cG56c3F4SnNSVm1CdmdLbW5SZUl4eVlPc1YxeApNQitvZkh0b0tnczRtNzJkRnZCVGdES2Q0MnRJTnlvajFUbFdsaEIxSGJjeEtyU1lubnp3WHF0a01mTlJqSVJBCjJhc0RYQTNkV2d2T0lDMDVnSHJucG9jNE1XZkZnVUxrUnk4bVpteTFWMWpaY0EyZWpDNzFZR3QzRkhIUXErOGcKT2ttVFJ5ZjVBb0dCQVBOZDlQdkJIYTRKQ1VBTEQ3SXRxczZuRm1CWEduckhhMmNiQm1EY2ZKMm9FSEFDa3RVbQoySWt0T1h0eWFRR0Z0NGZRTTRONGJNaXB5MVpaaGhKWitWM2h5MkdxYitBK0JLeWVRMmpPQjNkbS9BL1MvNTlWCjNoMitkZ2Nla3IzMDdMWUw2UDFVU001Z3h0KzVwbENjblVGZlh1VFVLNEprMDNSM0ZROTBrRXl2QW9HQkFPYVYKKy8xajc3Z0gxVkdLMytVd1NHK3VkRldQamVBc2EzZTA3RGRVYXFZdE1QWjY5TExVQk5yK0lJWk1BOVR3Q1JLbgpSczFveThkSEJId1VzRkNiSHpEVllubkdnby9UMlErOHdBaW4yTDExTlN5aHd4c29qVTBvSm95MG9mMnIvK2swCitBdXlkdUZ5NDFnOVNjUmNUL0ZxbkQ4UFBZWUN6ZzdkY21uN2JGTmRBb0dCQU96dWdGL0pkMWZFUEZrNWE2S1EKaTBaOXJXOUYzZVhDMkhHZEFleXpQQzlSUEErUXNkc0s0cTFLZGpnVS90NFlqTUdRbFZaZG02c1FnNEloemtGMwpqeXN6ZElvMUlJNDBVdUNyZy8wNCtGUHEwMk9rakhGWGE5T1JaZDh3aUxTZkN3V0JPdWZIY3NwWnRjU0NQY1VsCmRJUDhrYW8rVmMydzA1MERnbUYxbmpiSkFvR0JBSTVhMGpOaFcwRjJOSkFlK0pMNTkvNWE2WjlZL1BJRSttUHcKNGxSV1hYRXlQU1F1VEp1S29XVEJ0enF4K3p1ZTVUc0s0bjgxejNpN3MxMFhPTExLMGJySVFmK0VPbDZwSHp6RAovcHBaWlVteDdwNGJUK1NZYUlQVjRkYkVQYTNxWGhlUGlBTlFybXdKRGFvUVRGWloxMURueklaeDFqM0J4WTBQCjBlNzBOYkJSQW9HQWJKbkVZSStTalVKeUxucVlrTTF1RkI3aWZVMTlSNHpHNWdLRlJzVjQzV0hBd3JGMmI4RzMKSk95THcvQlhkSkhQODZHYXRYK0d5dE1ieFlDMFlHSlhrRGdEWU9waTdTaFFPU0VVSTJVOFZkYVRLeVVZZTN1dgo2OG5wdEp0ZnB1M1Y0NVpaSkw4YUtOb2UxTG9Db1kyZ2FTMkRGY3pEVkJYdjJnQXBCQWtGMW9rPQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQ==
-      APP_STORE_CONNECT_PRIVATE_KEY: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JR1RBZ0VBTUJNR0J5cUdTTTQ5QWdFR0NDcUdTTTQ5QXdFSEJIa3dkd0lCQVFRZ2tYRHVKZG1WVENBcTQvZ0sKbURMUEdnUzFlc3FVdGlBVXBGYnlSTitjMlRxZ0NnWUlLb1pJemowREFRZWhSQU5DQUFUaWxZWEY5dmkvTE5HZApHMk05S3lWaVFYYjJBdmkwR3pYMk1INnU2WWdEQ2czaCtYZTV3L0YwRy9OUU9LR2sxRWVQZTRLbDhlZy9MRXJ1CjlzaEp4TWp5Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0=
+      # APP_STORE_CONNECT_ISSUER_ID: f3c3afe7-dd6f-499b-8072-13e4e805c793
+      # APP_STORE_CONNECT_KEY_IDENTIFIER: W89FJQKB3W
+      # APP_AUTH_KEY_P8 : LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JR1RBZ0VBTUJNR0J5cUdTTTQ5QWdFR0NDcUdTTTQ5QXdFSEJIa3dkd0lCQVFRZ2tYRHVKZG1WVENBcTQvZ0sKbURMUEdnUzFlc3FVdGlBVXBGYnlSTitjMlRxZ0NnWUlLb1pJemowREFRZWhSQU5DQUFUaWxZWEY5dmkvTE5HZApHMk05S3lWaVFYYjJBdmkwR3pYMk1INnU2WWdEQ2czaCtYZTV3L0YwRy9OUU9LR2sxRWVQZTRLbDhlZy9MRXJ1CjlzaEp4TWp5Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0=
+      # CERTIFICATE_PRIVATE_KEY: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBMnpUL1Y4Z1hQVEJxc3VOK2lXT1NieW5zUzBremFLY2lhSGpiMmd4aU5CUUhWNndsClNrbHBpa2lkdVJkTG55T2JqUTNPeUpGODk5MG03VFVpVlJiWVZ6c0JBNXR5czFWQ3ptZm1rOCsxVXpJSUhQUmwKMjJ0ZkVQWm1tT2hpREt6cGlHaHU0VUVBZys4YUNXdmpqNjB6bUpDZklWKzlSdXVSdGRvM0V4SEdsZkFrS1ZLYgoyUUc0cnh4STBVTmhGaFRGQlN0Y2dtaXpqZkpoR0Fob1ZwWDloZ3gvMlJDcUJmVDIwUFZ2SmRBT0gxWUt5a1hqCnd3QmVzdHdCVnE0OWN0Mlh3SkpLOHdNS0RlU1VOWHNlOTJrejlHU0tjTzNRMmk3amhKR0FIRjdYUVdUZjdrVlAKa2ZpTGZMV3FkRFJodU1MNllQSzRBSWUyTUV2TFRiTS9FQnlZa3dJREFRQUJBb0lCQVFEQ2JCUVp1SGVjSnVoTAo5K2lRVk1kWlgxYWNRN1djR2JrejdoWVpKS2lwUmlacEJWOGhyMUV6ZkVxZ0V1QllxbzFab3lpSHpqcUg0UmVZCmhtc0lDellnMEUySzlJSGNPMEFBc0RqYld2dVphYU8yZ3JJZzFlL0FyTHE4M2tld3RHQ0JReGN0SktrZlc1KzkKUVhyWlFTYWxKNGhzWW0wUGpQcDB6N0hQY1JHd2cyUkFTbk96cG56c3F4SnNSVm1CdmdLbW5SZUl4eVlPc1YxeApNQitvZkh0b0tnczRtNzJkRnZCVGdES2Q0MnRJTnlvajFUbFdsaEIxSGJjeEtyU1lubnp3WHF0a01mTlJqSVJBCjJhc0RYQTNkV2d2T0lDMDVnSHJucG9jNE1XZkZnVUxrUnk4bVpteTFWMWpaY0EyZWpDNzFZR3QzRkhIUXErOGcKT2ttVFJ5ZjVBb0dCQVBOZDlQdkJIYTRKQ1VBTEQ3SXRxczZuRm1CWEduckhhMmNiQm1EY2ZKMm9FSEFDa3RVbQoySWt0T1h0eWFRR0Z0NGZRTTRONGJNaXB5MVpaaGhKWitWM2h5MkdxYitBK0JLeWVRMmpPQjNkbS9BL1MvNTlWCjNoMitkZ2Nla3IzMDdMWUw2UDFVU001Z3h0KzVwbENjblVGZlh1VFVLNEprMDNSM0ZROTBrRXl2QW9HQkFPYVYKKy8xajc3Z0gxVkdLMytVd1NHK3VkRldQamVBc2EzZTA3RGRVYXFZdE1QWjY5TExVQk5yK0lJWk1BOVR3Q1JLbgpSczFveThkSEJId1VzRkNiSHpEVllubkdnby9UMlErOHdBaW4yTDExTlN5aHd4c29qVTBvSm95MG9mMnIvK2swCitBdXlkdUZ5NDFnOVNjUmNUL0ZxbkQ4UFBZWUN6ZzdkY21uN2JGTmRBb0dCQU96dWdGL0pkMWZFUEZrNWE2S1EKaTBaOXJXOUYzZVhDMkhHZEFleXpQQzlSUEErUXNkc0s0cTFLZGpnVS90NFlqTUdRbFZaZG02c1FnNEloemtGMwpqeXN6ZElvMUlJNDBVdUNyZy8wNCtGUHEwMk9rakhGWGE5T1JaZDh3aUxTZkN3V0JPdWZIY3NwWnRjU0NQY1VsCmRJUDhrYW8rVmMydzA1MERnbUYxbmpiSkFvR0JBSTVhMGpOaFcwRjJOSkFlK0pMNTkvNWE2WjlZL1BJRSttUHcKNGxSV1hYRXlQU1F1VEp1S29XVEJ0enF4K3p1ZTVUc0s0bjgxejNpN3MxMFhPTExLMGJySVFmK0VPbDZwSHp6RAovcHBaWlVteDdwNGJUK1NZYUlQVjRkYkVQYTNxWGhlUGlBTlFybXdKRGFvUVRGWloxMURueklaeDFqM0J4WTBQCjBlNzBOYkJSQW9HQWJKbkVZSStTalVKeUxucVlrTTF1RkI3aWZVMTlSNHpHNWdLRlJzVjQzV0hBd3JGMmI4RzMKSk95THcvQlhkSkhQODZHYXRYK0d5dE1ieFlDMFlHSlhrRGdEWU9waTdTaFFPU0VVSTJVOFZkYVRLeVVZZTN1dgo2OG5wdEp0ZnB1M1Y0NVpaSkw4YUtOb2UxTG9Db1kyZ2FTMkRGY3pEVkJYdjJnQXBCQWtGMW9rPQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQ==
+      # APP_STORE_CONNECT_PRIVATE_KEY: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JR1RBZ0VBTUJNR0J5cUdTTTQ5QWdFR0NDcUdTTTQ5QXdFSEJIa3dkd0lCQVFRZ2tYRHVKZG1WVENBcTQvZ0sKbURMUEdnUzFlc3FVdGlBVXBGYnlSTitjMlRxZ0NnWUlLb1pJemowREFRZWhSQU5DQUFUaWxZWEY5dmkvTE5HZApHMk05S3lWaVFYYjJBdmkwR3pYMk1INnU2WWdEQ2czaCtYZTV3L0YwRy9OUU9LR2sxRWVQZTRLbDhlZy9MRXJ1CjlzaEp4TWp5Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0=
       
   
 
     steps:
     
-    - task: Bash@3
-      displayName: 'cocoa'
-      inputs:
-        targetType: inline
-        script: |
-          cd ios && brew install fastlane && fastlane init && ls
+    # - task: Bash@3
+    #   displayName: 'cocoa'
+    #   inputs:
+    #     targetType: inline
+    #     script: |
+    #       cd ios && brew install fastlane && fastlane init && ls
     # - task: Bash@3
     #   displayName: 'cocoa'
     #   inputs:
@@ -47,17 +47,17 @@ stages:
     #       sudo gem uninstall cocoapods -ax
     #       echo "installing cocoapods version pre"
     #       sudo gem install cocoapods --pre 
-    # - task: UsePythonVersion@0
-    #   inputs:
-    #     versionSpec: '3.x'
-    #     addToPath: true
-    #     architecture: 'x64'
-    # - task: Bash@3
-    #   displayName: 'code magic'
-    #   inputs:
-    #     targetType: inline
-    #     script: |
-    #       pip install codemagic-cli-tools
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.x'
+        addToPath: true
+        architecture: 'x64'
+    - task: Bash@3
+      displayName: 'code magic'
+      inputs:
+        targetType: inline
+        script: |
+          pip install codemagic-cli-tools
     # - task: Bash@3
     #   displayName: 'code magic 2'
     #   inputs:
@@ -65,13 +65,18 @@ stages:
     #     script: |
     #       app-store-connect fetch-signing-files com.staht.connect --create --type IOS_APP_STORE --platform IOS --issuer-id f3c3afe7-dd6f-499b-8072-13e4e805c793 --key-id W89FJQKB3W  
   
+    - task: Bash@3
+      displayName: 'code magic 2'
+      inputs:
+        targetType: inline
+        script: |
+          app-store-connect fetch-signing-files --issuer-id f3c3afe7-dd6f-499b-8072-13e4e805c793 --key-id C7QQ4SYRR5 --private-key "-----BEGIN PRIVATE KEY-----
+          MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQg3JkkVgJsI/40At8a
+          SUhs02DUmS6c+tqTY041LtJqKN6gCgYIKoZIzj0DAQehRANCAARj0f3KqRj8xLjo
+          AsmNTePXhE/YwEBTB96RsQIu2Mtr3LbqxsHNI2M8d/eTWWfAyPHCzSR7uXcJAzJu
+          r8X9Hby6
+          -----END PRIVATE KEY-----"  com.staht.connect  
     # - task: Bash@3
-    #   displayName: 'code magic 2'
-    #   inputs:
-    #     targetType: inline
-    #     script: |
-    #       app-store-connect fetch-signing-files com.staht.connect --create --type IOS_APP_STORE --platform IOS --issuer-id f3c3afe7-dd6f-499b-8072-13e4e805c793 --key-id W89FJQKB3W --private-key $(CERTIFICATE_PRIVATE_KEY) --certificate-key $(APP_STORE_CONNECT_PRIVATE_KEY)    
-    # # - task: Bash@3
     #   displayName: 'cocoa'
     #   inputs:
     #     targetType: inline
@@ -458,10 +463,10 @@ stages:
 #     #     packageApp: true
 #     #     exportMethod: package
 
-    - task: CopyFiles@2
-      inputs:
-        contents: '**/*.ipa'
-        targetFolder: '$(build.artifactStagingDirectory)'
+    # - task: CopyFiles@2
+    #   inputs:
+    #     contents: '**/*.ipa'
+    #     targetFolder: '$(build.artifactStagingDirectory)'
 #     - task: AppStoreRelease@1
 #       inputs:
 #         serviceEndpoint: 'Staht Connect App'

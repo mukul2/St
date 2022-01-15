@@ -29,7 +29,8 @@ workflows:
       - xcode-project use-profiles
       - declare -p
       - cat /Users/builder/export_options.plist
-      - flutter build ipa --export-options-plist=/Users/builder/export_options.plist
+      - /usr/bin/security find-identity -v -p codesigning
+     # - flutter build ipa --export-options-plist=/Users/builder/export_options.plist
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
